@@ -1,5 +1,4 @@
 <ul>
-    <!-- si vide renvois html que c'est vide -->
     @for (task of tasks; track task.id) {
         <li>{{task.title}} est {{task.statut}}</li>
     } @empty {

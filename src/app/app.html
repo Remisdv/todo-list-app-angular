@@ -19,7 +19,14 @@
     <app-header-title></app-header-title>
   </div>
   <div class="list">
-    <app-header-list></app-header-list>
+    <ul>
+      @for (task of tasks; track task.id) {
+        <app-todo-item 
+          [task]="task" 
+          (buttonClick)="onTaskClick($event)">
+        </app-todo-item>
+      }
+    </ul>
   </div>
 </main>
 <router-outlet />
