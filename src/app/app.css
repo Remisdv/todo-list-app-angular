@@ -1,0 +1,14 @@
+  .Header-Container {
+    max-width: 800px;
+    margin: 2em auto 1em auto;
+    text-align: center;
+    padding: 1em;
+    border-bottom: 2px solid #ccc;
+  }
+
+  .list {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1em;
+  }
+

@@ -1,5 +1,8 @@
-<li>
+<li [class.completed]="task.completed">
+  <input 
+    type="checkbox" 
+    [checked]="task.completed" 
+    (change)="onButtonClick()" 
+  />
   <span class="title">{{ task.title }}</span>
-  <span class="statut">{{ task.statut }}</span>
-  <button (click)="onButtonClick()">Voir détails</button>
 </li>

@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { HeaderTitle } from './header-title/header-title';
 import { TodoItem } from './todo-item/todo-item';
 import { Task } from './todo-item/model/Task';
-import { TaskStatus } from './todo-item/model/TaskStatus.enum';
+import { TodoService } from './services/todo';
 
 @Component({
   selector: 'app-root',
@@ -12,13 +12,27 @@ import { TaskStatus } from './todo-item/model/TaskStatus.enum';
   styleUrl: './app.css'
 })
 export class App {
-  tasks: Task[] = [
-    { id: 1, title: 'Apprendre Angular', statut: TaskStatus.COMPLETED },
-    { id: 2, title: 'Construire une application Todo', statut: TaskStatus.IN_PROGRESS },
-    { id: 3, title: "Tester l'application", statut: TaskStatus.PENDING },
-  ];
+  tasks: Task[] = [];
+
+  constructor(private todoService: TodoService) {
+    this.tasks = this.todoService.getAll();
+  }
 
   onTaskClick(id: number): void {
-    console.log('Tâche cliquée:', id);
+    const success = this.todoService.toggleStatus(id);
+    console.log('Toggle status:', id, success);
+  }
+
+  addTask(title: string): void {
+    this.todoService.add({ title });
+    // this.tasks = this.todoService.getAll();
+  }
+
+  deleteTask(id: number): void {
+    this.todoService.delete(id);
+  }
+
+  updateTaskTitle(id: number, newTitle: string): void {
+    this.todoService.updateTitle(id, newTitle);
   }
 }
