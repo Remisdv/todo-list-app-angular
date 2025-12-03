@@ -9,8 +9,17 @@ import { Task } from '../../feature/todo/model/Task';
 
 @Injectable()
 export class MockApiInterceptor implements HttpInterceptor {
-  private tasks: Task[] = [];
-  private nextId = 1;
+  private tasks: Task[] = [
+    { id: 1, title: 'Apprendre Angular', completed: true },
+    { id: 2, title: 'Construire une application Todo', completed: false },
+    { id: 3, title: "Tester l'application", completed: false }
+  ];
+  private nextId = 4;
+
+  private extractId(url: string): number {
+    const parts = url.split('/');
+    return parseInt(parts[parts.length - 1], 10);
+  }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const { url, method, body } = req;
@@ -65,10 +74,5 @@ export class MockApiInterceptor implements HttpInterceptor {
     }
 
     return next.handle(req);
-  }
-
-  private extractId(url: string): number {
-    const parts = url.split('/');
-    return parseInt(parts[parts.length - 1], 10);
   }
 }
