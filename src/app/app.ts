@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { AsyncPipe } from '@angular/common';
+import { Observable } from 'rxjs';
 import { HeaderTitle } from './header-title/header-title';
 import { TodoItem } from './todo-item/todo-item';
 import { Task } from './todo-item/model/Task';
@@ -7,25 +9,24 @@ import { TodoService } from './services/todo';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HeaderTitle, TodoItem],
+  imports: [RouterOutlet, HeaderTitle, TodoItem, AsyncPipe],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
 export class App {
-  tasks: Task[] = [];
+  tasks$: Observable<Task[]>;
 
   constructor(private todoService: TodoService) {
-    this.tasks = this.todoService.getAll();
+    this.tasks$ = this.todoService.tasks$;
   }
 
   onTaskClick(id: number): void {
-    const success = this.todoService.toggleStatus(id);
-    console.log('Toggle status:', id, success);
+    this.todoService.toggleStatus(id);
+    console.log('Toggle status:', id);
   }
 
   addTask(title: string): void {
     this.todoService.add({ title });
-    // this.tasks = this.todoService.getAll();
   }
 
   deleteTask(id: number): void {

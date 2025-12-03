@@ -1,56 +1,57 @@
 import { Injectable } from '@angular/core';
 import { Task } from '../todo-item/model/Task';
 import { CreateTaskDto } from '../todo-item/model/CreateTaskDto';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { TaskApiService } from './task-api-service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TodoService {
-  private tasks: Task[] = [];
 
-  constructor() {
-    this.add({ title: 'Apprendre Angular' });
-    this.add({ title: 'Construire une application Todo' });
-    this.add({ title: "Tester l'application" });
+  private tasksSubject = new BehaviorSubject<Task[]>([]);
+  tasks$: Observable<Task[]> = this.tasksSubject.asObservable();
+
+  constructor(private taskApiService: TaskApiService) {
+    this.taskApiService.create({ title: 'Apprendre Angular' }).subscribe();
+    this.taskApiService.create({ title: 'Construire une application Todo' }).subscribe();
+    this.taskApiService.create({ title: "Tester l'application" }).subscribe(() => {
+      this.loadTasks();
+    });
   }
 
-  getAll(): Task[] {
-    return [...this.tasks];
-    // return this.tasks;
+  loadTasks(): void {
+    this.taskApiService.getAll().subscribe(tasks => {
+      this.tasksSubject.next(tasks);
+    });
   }
 
   add(task: CreateTaskDto): void {
-    const newId = this.tasks.length > 0 
-      ? Math.max(...this.tasks.map(t => t.id)) + 1 
-      : 1;
-    
-    this.tasks.push({
-      id: newId,
-      title: task.title,
-      completed: false
+    this.taskApiService.create(task).subscribe(() => {
+      this.loadTasks();
     });
   }
 
   updateTitle(id: number, title: string): void {
-    const task = this.tasks.find(t => t.id === id);
-    if (task) {
-      task.title = title;
-    }
+    this.taskApiService.update(id, { title }).subscribe(() => {
+      this.loadTasks();
+    });
   }
 
-  toggleStatus(id: number): boolean {
-    const task = this.tasks.find(t => t.id === id);
-    if (task) {
-      task.completed = !task.completed;
-      return true;
-    }
-    return false;
+  toggleStatus(id: number): void {
+    this.taskApiService.getAll().subscribe(tasks => {
+      const task = tasks.find(t => t.id === id);
+      if (task) {
+        this.taskApiService.update(id, { completed: !task.completed }).subscribe(() => {
+          this.loadTasks();
+        });
+      }
+    });
   }
 
   delete(id: number): void {
-    const index = this.tasks.findIndex(t => t.id === id);
-    if (index !== -1) {
-      this.tasks.splice(index, 1);
-    }
+    this.taskApiService.delete(id).subscribe(() => {
+      this.loadTasks();
+    });
   }
 }
