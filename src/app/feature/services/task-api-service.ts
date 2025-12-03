@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { Task } from '../todo-item/model/Task';
-import { CreateTaskDto } from '../todo-item/model/CreateTaskDto';
+import { Task } from '../model/Task';
+import { CreateTaskDto } from '../model/CreateTaskDto';
 
 @Injectable({
   providedIn: 'root',

@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { HeaderListTasks } from './model/HeaderListTasks';
-import { TaskStatus } from './model/TaskStatus.enum';
+import { HeaderListTasks } from '../model/HeaderListTasks';
+import { TaskStatus } from '../model/TaskStatus.enum';
 
 @Component({
   selector: 'app-header-list',

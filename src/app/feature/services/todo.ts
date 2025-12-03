@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Task } from '../todo-item/model/Task';
-import { CreateTaskDto } from '../todo-item/model/CreateTaskDto';
+import { Task } from '../model/Task';
+import { CreateTaskDto } from '../model/CreateTaskDto';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { TaskApiService } from './task-api-service';
 

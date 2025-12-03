@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { AsyncPipe } from '@angular/common';
 import { Observable } from 'rxjs';
-import { TodoItem } from './todo-item/todo-item';
-import { Task } from './todo-item/model/Task';
-import { TodoService } from './services/todo';
+import { TodoItem } from './feature/todo-item/todo-item';
+import { Task } from './feature/model/Task';
+import { TodoService } from './feature/services/todo';
 
 @Component({
   selector: 'app-root',
