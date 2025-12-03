@@ -19,6 +19,7 @@ export class TaskApiService {
 
   // Simule POST /tasks
   create(task: CreateTaskDto): Observable<Task> {
+    console.log('Creating task:', task);
     const newId = this.tasks.length > 0 
       ? Math.max(...this.tasks.map(t => t.id)) + 1 
       : 1;
