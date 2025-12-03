@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Task } from '../model/Task';
 import { CreateTaskDto } from '../model/CreateTaskDto';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { TaskApiService } from './task-api-service';
 import { TaskStore } from './task.store';
 
@@ -9,7 +9,7 @@ import { TaskStore } from './task.store';
   providedIn: 'root'
 })
 export class TodoService {
-  tasks$!: Observable<Task[]>;
+  tasks$: Observable<Task[]>;
 
   constructor(
     private taskApiService: TaskApiService,
@@ -22,7 +22,7 @@ export class TodoService {
       this.loadTasks();
     });
   }
-  
+
   loadTasks(): void {
     this.taskApiService.getAll().subscribe(tasks => {
       this.taskStore.setTask(tasks);
@@ -36,18 +36,15 @@ export class TodoService {
   }
 
   updateTitle(id: number, title: string): void {
-    this.taskApiService.update(id, { title }).subscribe( ()=> {
+    this.taskApiService.update(id, { title }).subscribe(() => {
       this.taskStore.update(id, { title });
     });
   }
 
   toggleStatus(id: number): void {
-    this.taskApiService.getAll().subscribe(tasks => {
-      const task = tasks.find(t => t.id === id);
-      if (task) {
-        this.taskApiService.update(id, { completed: !task.completed }).subscribe(newtask => {
-          this.loadTasks();
-        });
+    this.taskApiService.toggle(id).subscribe(updatedTask => {
+      if (updatedTask) {
+        this.taskStore.update(id, { completed: updatedTask.completed });
       }
     });
   }

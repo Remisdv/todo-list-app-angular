@@ -34,3 +34,14 @@ input[type="checkbox"] {
   height: 20px;
   cursor: pointer;
 }
+.delete-button button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 0.5em 1em;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.delete-button button:hover {
+  background-color: #c0392b;
+}

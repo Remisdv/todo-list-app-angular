@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { Task } from '../model/Task';
 import { CreateTaskDto } from '../model/CreateTaskDto';
 
@@ -8,49 +8,32 @@ import { CreateTaskDto } from '../model/CreateTaskDto';
   providedIn: 'root',
 })
 export class TaskApiService {
-  private tasks: Task[] = [];
+  private apiUrl = '/api/tasks';
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  // Simule GET /tasks
+  // GET /api/tasks
   getAll(): Observable<Task[]> {
-    return of([...this.tasks]).pipe(delay(300));
+    return this.http.get<Task[]>(this.apiUrl);
   }
 
-  // Simule POST /tasks
+  // POST /api/tasks
   create(task: CreateTaskDto): Observable<Task> {
-    console.log('Creating task:', task);
-    const newId = this.tasks.length > 0 
-      ? Math.max(...this.tasks.map(t => t.id)) + 1 
-      : 1;
-    
-    const newTask: Task = {
-      id: newId,
-      title: task.title,
-      completed: false
-    };
-    
-    this.tasks.push(newTask);
-    return of(newTask).pipe(delay(300));
+    return this.http.post<Task>(this.apiUrl, task);
   }
 
-  // Simule PUT /tasks/:id
-  update(id: number, task: Partial<Task>): Observable<Task | null> {
-    const index = this.tasks.findIndex(t => t.id === id);
-    if (index !== -1) {
-      this.tasks[index] = { ...this.tasks[index], ...task };
-      return of(this.tasks[index]).pipe(delay(300));
-    }
-    return of(null).pipe(delay(300));
+  // PUT /api/tasks/:id
+  update(id: number, changes: Partial<Task>): Observable<Task | null> {
+    return this.http.put<Task>(`${this.apiUrl}/${id}`, changes);
   }
 
-  // Simule DELETE /tasks/:id
+  // PATCH /api/tasks/:id/toggle
+  toggle(id: number): Observable<Task | null> {
+    return this.http.patch<Task>(`${this.apiUrl}/${id}/toggle`, {});
+  }
+
+  // DELETE /api/tasks/:id
   delete(id: number): Observable<boolean> {
-    const index = this.tasks.findIndex(t => t.id === id);
-    if (index !== -1) {
-      this.tasks.splice(index, 1);
-      return of(true).pipe(delay(300));
-    }
-    return of(false).pipe(delay(300));
+    return this.http.delete<boolean>(`${this.apiUrl}/${id}`);
   }
 }
