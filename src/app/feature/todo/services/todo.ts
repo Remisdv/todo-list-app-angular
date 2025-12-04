@@ -38,11 +38,15 @@ export class TodoService {
   }
 
   toggleStatus(id: number): void {
-    this.taskApiService.toggle(id).subscribe(updatedTask => {
-      if (updatedTask) {
-        this.taskStore.update(id, { completed: updatedTask.completed });
-      }
-    });
+    const task = this.taskStore.getTask(id);
+    if (task) {
+      const newCompleted = !task.completed;
+      this.taskApiService.update(id, { completed: newCompleted }).subscribe(updatedTask => {
+        if (updatedTask) {
+          this.taskStore.update(id, { completed: updatedTask.completed });
+        }
+      });
+    }
   }
 
   delete(id: number): void {

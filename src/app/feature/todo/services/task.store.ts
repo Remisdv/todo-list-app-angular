@@ -14,6 +14,10 @@ export class TaskStore {
     this.taskSubject.next(tasks);
   }
 
+  getTask(id: number): Task | undefined {
+    return this.taskSubject.getValue().find(t => t.id === id);
+  }
+
   add(task: Task): void {
     const currentTasks = this.taskSubject.getValue();
     console.log('Current Tasks:', task);

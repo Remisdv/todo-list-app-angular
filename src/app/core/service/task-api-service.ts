@@ -22,14 +22,9 @@ export class TaskApiService {
     return this.http.post<Task>(this.apiUrl, task);
   }
 
-  // PUT /api/tasks/:id
+  // PATCH /api/tasks/:id
   update(id: number, changes: Partial<Task>): Observable<Task | null> {
-    return this.http.put<Task>(`${this.apiUrl}/${id}`, changes);
-  }
-
-  // PATCH /api/tasks/:id/toggle
-  toggle(id: number): Observable<Task | null> {
-    return this.http.patch<Task>(`${this.apiUrl}/${id}/toggle`, {});
+    return this.http.patch<Task>(`${this.apiUrl}/${id}`, changes);
   }
 
   // DELETE /api/tasks/:id
