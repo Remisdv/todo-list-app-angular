@@ -26,7 +26,6 @@ export class TaskForm {
     const taskDescription = this.taskForm.value.description;
     
     if (taskTitle) {
-      console.log('Adding task:', taskTitle);
       this.todoService.add({ 
         title: taskTitle, 
         description: taskDescription || undefined 
