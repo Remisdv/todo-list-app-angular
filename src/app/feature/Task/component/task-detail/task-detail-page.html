@@ -1,14 +1,2 @@
 <div class="detail-container">
-  @if (task$ | async; as task) {
-    <h2>Détail de la tâche #{{ task.id }}</h2>
-    <div class="card">
-      <h3>{{ task.title }}</h3>
-      <p><strong>Description :</strong> {{ task.description || 'Aucune description' }}</p>
-      <p><strong>Statut :</strong> {{ task.completed ? 'Terminée' : 'En cours' }}</p>
-    </div>
-    <a routerLink="/tasks" class="back-link">← Retour à la liste</a>
-  } @else {
-    <p>Tâche introuvable...</p>
-    <a routerLink="/tasks">Retour</a>
-  }
 </div>
