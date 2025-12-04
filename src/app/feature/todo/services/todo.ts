@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Task } from '../model/Task';
 import { CreateTaskDto } from '../model/CreateTaskDto';
 import { Observable } from 'rxjs';
-import { TaskApiService } from './task-api-service';
+import { TaskApiService } from '../../../core/service/task-api-service';
 import { TaskStore } from './task.store';
 
 @Injectable({
