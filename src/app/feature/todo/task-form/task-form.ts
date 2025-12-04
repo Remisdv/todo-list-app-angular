@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import { TodoService } from '../services/todo';
+import { requiredAndMinLengthValidator, bannedWordsValidator } from '../../../shared/validators/custom-validators';
+
 
 @Component({
   selector: 'app-task-form',
@@ -10,7 +12,10 @@ import { TodoService } from '../services/todo';
 })
 export class TaskForm {
   taskForm = new FormGroup({
-    title: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    title: new FormControl('', [
+      requiredAndMinLengthValidator(3),
+      bannedWordsValidator(['spam', 'interdit', 'test']) 
+    ]),
     description: new FormControl('')
   });
 
@@ -18,8 +23,6 @@ export class TaskForm {
 
   onSubmit(): void {
     if (this.taskForm.invalid) {
-      console.log('Form is invalid');
-      this.taskForm.reset();
       return;
     }
     const taskTitle = this.taskForm.value.title;
