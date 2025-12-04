@@ -1,11 +1,12 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Task } from '../../model/Task';
-import { TodoService } from '../../services/todo';
+import { Task } from '../../../../shared/model/Task';
+import { TodoService } from '../../service/todo';
 import { Observable } from 'rxjs';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-todo-item',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './todo-item.html',
   styleUrl: './todo-item.css',
 })

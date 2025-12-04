@@ -4,6 +4,11 @@
     [checked]="task.completed" 
     (change)="onButtonClick()" 
   />
-  <span class="title">{{ task.title }}</span>
+  <span 
+    class="title" 
+    style="cursor: pointer; text-decoration: underline;">
+    {{ task.title }}
+  </span>
+  <span class="details-button"><button [routerLink]="['/tasks', task.id]">Détails</button></span>
   <span class="delete-button"><button (click)="onDeleteClick()">delete</button></span>
 </li>

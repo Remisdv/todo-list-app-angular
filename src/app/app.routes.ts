@@ -1,8 +1,7 @@
 import { Routes } from '@angular/router';
-import { App } from './app';
-import { NewTaskPage } from './feature/todo/page/new-task-page/new-task-page';
-import { TaskPage } from './feature/todo/page/task-page/task-page';
-import { TaskDetailPage } from './feature/todo/page/task-detail-page/task-detail-page';
+import { TaskForm } from './feature/Task/component/task-form/task-form';
+import { TaskPage } from './feature/Task/task-page';
+import { TaskDetailPage } from './feature/Task/component/task-detail/task-detail-page';
 
 export const routes: Routes = [
     {
@@ -11,10 +10,15 @@ export const routes: Routes = [
     },
     {
         path: 'tasks/new',
-        component: NewTaskPage,
+        component: TaskForm,
     },
     {
         path: 'tasks/:id',
         component: TaskDetailPage,
+    },
+    {
+        path: '',
+        redirectTo: 'tasks',
+        pathMatch: 'full'
     }
 ];

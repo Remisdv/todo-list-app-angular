@@ -5,7 +5,7 @@ import {
 } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { Task } from '../../feature/todo/model/Task';
+import { Task } from '../../shared/model/Task';
 
 @Injectable()
 export class MockApiInterceptor implements HttpInterceptor {

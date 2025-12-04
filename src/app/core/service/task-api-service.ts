@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Task } from '../../feature/todo/model/Task';
-import { CreateTaskDto } from '../../feature/todo/model/CreateTaskDto';
+import { Task } from '../../shared/model/Task';
+import { CreateTaskDto } from '../../shared/model/CreateTaskDto';
 
 @Injectable({
   providedIn: 'root',

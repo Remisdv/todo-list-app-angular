@@ -11,8 +11,7 @@
       @for (task of tasks$ | async; track task.id) {
         <app-todo-item 
           [task]="task" 
-          (buttonClick)="onTaskClick($event)"
-          [routerLink]="['/task', task.id]">
+          (buttonClick)="onTaskClick($event)">
         </app-todo-item>
       }
     </ul>

@@ -1,14 +1,13 @@
 import { Component } from '@angular/core';
-import { TodoItem } from '../../component/todo-item/todo-item';
+import { TodoItem } from './component/todo-item/todo-item';
 import { Observable } from 'rxjs';
-import { Task } from '../../model/Task';
-import { TodoService } from '../../services/todo';
+import { Task } from '../../shared/model/Task';
+import { TodoService } from './service/todo';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-task-page',
-  imports: [CommonModule, TodoItem, RouterLink],
+  imports: [CommonModule, TodoItem],
   templateUrl: './task-page.html',
   styleUrl: './task-page.css',
 })

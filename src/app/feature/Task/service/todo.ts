@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Task } from '../model/Task';
-import { CreateTaskDto } from '../model/CreateTaskDto';
+import { Task } from '../../../shared/model/Task';
+import { CreateTaskDto } from '../../../shared/model/CreateTaskDto';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { TaskApiService } from '../../../core/service/task-api-service';
 import { TaskStore } from './task.store';
 
@@ -23,6 +24,12 @@ export class TodoService {
     this.taskApiService.getAll().subscribe(tasks => {
       this.taskStore.setTask(tasks);
     });
+  }
+
+  getById(id: number): Observable<Task | undefined> {
+    return this.tasks$.pipe(
+      map(tasks => tasks.find(t => t.id === id))
+    );
   }
 
   add(task: CreateTaskDto): void {
