@@ -5,10 +5,11 @@ import { Observable } from 'rxjs';
 import { TodoItem } from './feature/todo/todo-item/todo-item';
 import { Task } from './feature/todo/model/Task';
 import { TodoService } from './feature/todo/services/todo';
+import { TaskForm } from './feature/todo/task-form/task-form';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, TodoItem, AsyncPipe],
+  imports: [RouterOutlet, TodoItem, AsyncPipe, TaskForm],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
@@ -22,10 +23,6 @@ export class App {
   onTaskClick(id: number): void {
     this.todoService.toggleStatus(id);
     console.log('Toggle status:', id);
-  }
-
-  addTask(title: string): void {
-    this.todoService.add({ title });
   }
 
   deleteTask(id: number): void {

@@ -26,8 +26,12 @@ export class TodoService {
   }
 
   add(task: CreateTaskDto): void {
-    this.taskApiService.create(task).subscribe(newtask => {
-      this.taskStore.add(newtask);
+    this.taskApiService.create(task).subscribe({
+      next: (newtask) => {
+        console.log('Task created:', newtask);
+        this.taskStore.add(newtask);
+      },
+      error: (err) => console.error('Error creating task:', err)
     });
   }
 

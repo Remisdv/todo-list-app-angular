@@ -1,0 +1,30 @@
+  /* <label class="label-title" for="title">Titre: </label>
+  <input class="input-title" id="title" type="text" formControlName="title">
+  <label class="label-description" for="description">Description: </label>
+  <input class="input-description" id="description" type="text" formControlName="description">
+  <button class="button-submit" type="submit">Ajouter la tâche</button> */
+
+.button-submit {
+margin-top: 1em;
+padding: 0.5em 1em;
+font-size: 1em;
+background-color: #28a745;
+color: white;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+}
+
+.button-submit:hover {
+    background-color: #218838;
+}
+
+.input-title, .input-description {
+    display: inline-block;
+    width: auto;
+    padding: 0.5em;
+    margin: 0.5em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1em;
+}

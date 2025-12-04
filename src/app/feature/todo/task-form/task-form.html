@@ -1,0 +1,7 @@
+<form [formGroup]="taskForm" (ngSubmit)="onSubmit()">
+  <label class="label-title" for="title">Titre: </label>
+  <input class="input-title" id="title" type="text" formControlName="title">
+  <label class="label-description" for="description">Description: </label>
+  <input class="input-description" id="description" type="text" formControlName="description">
+  <button class="button-submit" type="submit">Ajouter la tâche</button>
+</form>
