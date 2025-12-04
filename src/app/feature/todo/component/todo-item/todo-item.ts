@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Task } from '../model/Task';
-import { TodoService } from '../services/todo';
+import { Task } from '../../model/Task';
+import { TodoService } from '../../services/todo';
 import { Observable } from 'rxjs';
 
 @Component({

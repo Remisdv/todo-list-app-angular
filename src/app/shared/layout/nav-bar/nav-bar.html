@@ -1,0 +1,17 @@
+<nav class="navbar">
+  <div class="navbar-brand">
+    <a routerLink="/tasks">Todo App</a>
+  </div>
+  <ul class="navbar-menu">
+    <li>
+      <a routerLink="/tasks" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+        Mes Tâches
+      </a>
+    </li>
+    <li>
+      <a routerLink="/tasks/new" routerLinkActive="active">
+        Nouvelle Tâche
+      </a>
+    </li>
+  </ul>
+</nav>

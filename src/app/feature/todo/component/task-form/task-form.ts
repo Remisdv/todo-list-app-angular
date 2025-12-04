@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
-import { TodoService } from '../services/todo';
-import { requiredAndMinLengthValidator, bannedWordsValidator } from '../../../shared/validators/custom-validators';
+import { TodoService } from '../../services/todo';
+import { requiredAndMinLengthValidator, bannedWordsValidator } from '../../../../shared/validators/custom-validators';
 
 
 @Component({

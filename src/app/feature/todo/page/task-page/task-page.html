@@ -1,0 +1,20 @@
+
+<main class="main">
+  <div class="Header-Container">
+    <div class="header">
+      <h1>Bienvenue dans votre application de gestion des taches !</h1>
+      <p>Gestion des taches</p>
+    </div>
+  </div>
+  <div class="list">
+    <ul>
+      @for (task of tasks$ | async; track task.id) {
+        <app-todo-item 
+          [task]="task" 
+          (buttonClick)="onTaskClick($event)"
+          [routerLink]="['/task', task.id]">
+        </app-todo-item>
+      }
+    </ul>
+  </div>
+</main>

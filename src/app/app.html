@@ -1,23 +1,5 @@
 
+<app-nav-bar></app-nav-bar>
 <main class="main">
-  <div class="Header-Container">
-    <div class="header">
-      <h1>Bienvenue dans votre application de gestion des taches !</h1>
-      <p>Gestion des taches</p>
-    </div>
-  </div>
-  <div class="list">
-    <div class="add-task">
-      <app-task-form></app-task-form>
-    </div>
-    <ul>
-      @for (task of tasks$ | async; track task.id) {
-        <app-todo-item 
-          [task]="task" 
-          (buttonClick)="onTaskClick($event)">
-        </app-todo-item>
-      }
-    </ul>
-  </div>
+  <router-outlet />
 </main>
-<router-outlet />
